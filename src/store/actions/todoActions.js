@@ -6,6 +6,8 @@ import {
   FETCH_TODOS_SUCCESS,
   REMOVE_TODO,
   TOGGLE_COMPLETE,
+  SET_TODO_INPUT,
+  SET_TODO_ERROR,
 } from "../types/todoTypes";
 
 export const addItem = (item) => ({
@@ -21,6 +23,16 @@ export const removeItem = (id) => ({
 export const toggleComplete = (id) => ({
   type: TOGGLE_COMPLETE,
   payload: id,
+});
+
+export const setTodoInput = (text) => ({
+  type: SET_TODO_INPUT,
+  payload: text,
+});
+
+export const setTodoError = (error) => ({
+  type: SET_TODO_ERROR,
+  payload: error,
 });
 
 export const fetchItems = () => {

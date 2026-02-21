@@ -1,16 +1,56 @@
-# React + Vite
+# Todos Advanced
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, advanced Todo application built with React, Redux, and Tailwind CSS. This project demonstrates state management using Redux and asynchronous actions with Redux Thunk.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Framework**: React 19 + Vite
+- **State Management**: Redux & React-Redux
+- **Middleware**: Redux Thunk
+- **Styling**: Tailwind CSS
+- **HTTP Client**: Axios
 
-## React Compiler
+## 📁 Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The project follows a clean and modular architecture, separating UI components from global state management and custom logic:
 
-## Expanding the ESLint configuration
+```
+src/
+├── components/      # Reusable UI components
+├── hooks/           # Custom React hooks
+├── store/           # Redux setup
+│   ├── actions/     # Action creators and thunks
+│   ├── reducers/    # State reducers
+│   ├── types/       # Action type constants
+│   └── index.js     # Redux store configuration
+├── App.jsx          # Main application layout
+├── main.jsx         # React application entry point
+└── index.css        # Global styles and Tailwind configuration
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Key Features
+
+- **Global State Management**: Leverages Redux to handle state efficiently across the entire application without prop drilling.
+- **Asynchronous Data Fetching**: Uses Redux Thunk to fetch dummy todo data from `https://jsonplaceholder.typicode.com/todos` on initial load.
+- **Custom Hooks**: Business logic and Redux subscriptions are abstracted into custom hooks (`useTodos`) to keep components clean.
+- **Modern UI**: Styled with the latest Tailwind CSS v4, featuring a sleek dark mode out of the box and responsive layouts.
+- **Component Separation**: UI sections are cleanly divided into specialized components (Header, AddTodo, TodoInfo, TodoList).
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+Make sure you have Node.js and a package manager like `pnpm`, `npm`, or `yarn` installed.
+
+### Installation
+
+1. Clone the repository and navigate into the project directory.
+2. Install the dependencies:
+   ```bash
+   pnpm install
+   ```
+3. Start the Vite development server:
+   ```bash
+   pnpm dev
+   ```
+4. Open your browser and visit `http://localhost:5173` (or the URL provided in your terminal).

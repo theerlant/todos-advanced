@@ -5,12 +5,17 @@ import {
   FETCH_TODOS_SUCCESS,
   REMOVE_TODO,
   TOGGLE_COMPLETE,
+  SET_TODO_INPUT,
+  SET_TODO_ERROR,
 } from "../types/todoTypes";
 
 const initialState = {
   loading: false,
   items: [],
   error: "",
+  todoInput: "",
+  todoError: "",
+  nextId: 1,
 };
 
 const todoReducer = (state = initialState, action) => {
@@ -19,6 +24,9 @@ const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [...state.items, action.payload],
+        todoInput: "",
+        todoError: "",
+        nextId: state.nextId + 1,
       };
     case REMOVE_TODO:
       return {
@@ -49,11 +57,30 @@ const todoReducer = (state = initialState, action) => {
         items: [],
         error: action.payload,
       };
-    case FETCH_TODOS_SUCCESS:
+    case FETCH_TODOS_SUCCESS: {
+      const highestId =
+        action.payload.length > 0
+          ? Math.max(...action.payload.map((item) => item.id))
+          : 0; // Find highest id from fetched data
+
       return {
+        ...state,
         loading: false,
         items: action.payload,
         error: "",
+        nextId: highestId + 1,
+      };
+    }
+    case SET_TODO_INPUT:
+      return {
+        ...state,
+        todoInput: action.payload,
+        todoError: "", // Clear error when user types
+      };
+    case SET_TODO_ERROR:
+      return {
+        ...state,
+        todoError: action.payload,
       };
     default:
       return state;
