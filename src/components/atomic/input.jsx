@@ -9,7 +9,7 @@ const Input = memo(function Input({ value, onChange, error }) {
       placeholder="Tambah tugas baru"
       className={`
         transition-colors duration-300
-        p-3 rounded-lg text-sm
+        p-2 md:p-3 rounded-lg text-xs md:text-sm
         bg-gray-100 dark:bg-gray-500
         focus:bg-white focus:dark:bg-gray-400
         outline-2 -outline-offset-2

@@ -10,7 +10,7 @@ export default function AddTodo() {
     <form
       id="add"
       onSubmit={handleAddTodoSubmit}
-      className="flex flex-col px-8 gap-2 bg-linear-to-b from-gray-200 dark:from-gray-700 from-50% to-gray-100 dark:to-gray-600 to-50%"
+      className="flex flex-col px-hoz-mobile md:px-hoz-tablet xl:px-hoz-desktop gap-2 bg-linear-to-b from-gray-200 dark:from-gray-700 from-50% to-gray-100 dark:to-gray-600 to-50%"
     >
       <div className="flex w-full gap-2 *:first:w-full">
         <Input
