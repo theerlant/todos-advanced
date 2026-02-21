@@ -18,5 +18,3 @@
 body {
   font-family: 'Inter';
 }
-
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
