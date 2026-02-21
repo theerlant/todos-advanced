@@ -1,6 +1,10 @@
+import { memo } from "react";
 import { MdAddCircleOutline } from "react-icons/md";
 
-export default function CreateButton({ onClick = () => {}, type = "button" }) {
+const CreateButton = memo(function CreateButton({
+  onClick = () => {},
+  type = "button",
+}) {
   return (
     <button
       type={type}
@@ -11,4 +15,6 @@ export default function CreateButton({ onClick = () => {}, type = "button" }) {
       <MdAddCircleOutline className="text-base" />
     </button>
   );
-}
+});
+
+export default CreateButton;

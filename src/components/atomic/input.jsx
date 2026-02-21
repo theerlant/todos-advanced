@@ -1,4 +1,6 @@
-export default function Input({ value, onChange, error }) {
+import { memo } from "react";
+
+const Input = memo(function Input({ value, onChange, error }) {
   return (
     <input
       type="text"
@@ -20,4 +22,6 @@ export default function Input({ value, onChange, error }) {
         `}
     ></input>
   );
-}
+});
+
+export default Input;

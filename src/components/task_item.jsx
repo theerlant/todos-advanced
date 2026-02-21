@@ -1,10 +1,11 @@
+import { memo } from "react";
 import Checkbox from "./atomic/checkbox";
 import DeleteButton from "./atomic/delete_button";
 
 const placeholderTitle =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque repudiandae aliquam maiores totam quod voluptatem labore blanditiis, illo.";
 
-export default function TaskItem({
+const TaskItem = memo(function TaskItem({
   title = placeholderTitle,
   completed = false,
   onCheck = () => {},
@@ -31,4 +32,6 @@ export default function TaskItem({
       <DeleteButton onClick={onDelete} />
     </div>
   );
-}
+});
+
+export default TaskItem;

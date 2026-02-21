@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useCallback } from "react";
 import {
   fetchItems,
   removeItem,
@@ -27,30 +27,42 @@ export function useTodos() {
     return count;
   }, [items]);
 
-  const handleToggle = (id) => dispatch(toggleComplete(id));
-  const handleDelete = (id) => dispatch(removeItem(id));
+  const handleToggle = useCallback(
+    (id) => dispatch(toggleComplete(id)),
+    [dispatch],
+  );
+  const handleDelete = useCallback(
+    (id) => dispatch(removeItem(id)),
+    [dispatch],
+  );
 
-  const handleAddTodoChange = (e) => {
-    dispatch(setTodoInput(e.target.value));
-  };
+  const handleAddTodoChange = useCallback(
+    (e) => {
+      dispatch(setTodoInput(e.target.value));
+    },
+    [dispatch],
+  );
 
-  const handleAddTodoSubmit = (e) => {
-    e.preventDefault();
-    const trimmedInput = todoInput.trim();
+  const handleAddTodoSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      const trimmedInput = todoInput.trim();
 
-    if (!trimmedInput) {
-      dispatch(setTodoError("Todo tidak boleh kosong"));
-      return;
-    }
+      if (!trimmedInput) {
+        dispatch(setTodoError("Todo tidak boleh kosong"));
+        return;
+      }
 
-    dispatch(
-      addItem({
-        id: nextId,
-        title: trimmedInput,
-        completed: false,
-      }),
-    );
-  };
+      dispatch(
+        addItem({
+          id: nextId,
+          title: trimmedInput,
+          completed: false,
+        }),
+      );
+    },
+    [dispatch, todoInput, nextId],
+  );
 
   return {
     items,
