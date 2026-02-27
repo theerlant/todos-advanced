@@ -46,6 +46,12 @@ export function useTodos() {
   const handleAddTodoSubmit = useCallback(
     (e) => {
       e.preventDefault();
+
+      if (!todoInput) {
+        dispatch(setTodoError("Todo tidak boleh kosong"));
+        return;
+      }
+
       const trimmedInput = todoInput.trim();
 
       if (!trimmedInput) {

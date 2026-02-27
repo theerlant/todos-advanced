@@ -39,20 +39,48 @@ export const fetchItems = () => {
   return async (dispatch) => {
     dispatch({ type: FETCH_TODOS_REQUEST });
 
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos")
-      .then((response) => {
-        const items = response.data;
-        dispatch({
-          type: FETCH_TODOS_SUCCESS,
-          payload: items,
+    let loaded = false;
+
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // await new promise object that return resolve after 2s using setTimeout
+
+    // load from localstorage first
+    const itemString = localStorage.getItem("todos");
+    if (itemString) {
+      try {
+        // try parse and check length
+        const items = JSON.parse(itemString);
+
+        if (items.length !== 0) {
+          loaded = true;
+          dispatch({
+            type: FETCH_TODOS_SUCCESS,
+            payload: items,
+          });
+        }
+      } catch (error) {
+        // error loading items, fetch from api.
+        loaded = false;
+
+        console.error("parse error:", error.message);
+      }
+    }
+
+    if (!loaded) {
+      axios
+        .get("https://jsonplaceholder.typicode.com/todos")
+        .then((response) => {
+          const items = response.data;
+          dispatch({
+            type: FETCH_TODOS_SUCCESS,
+            payload: items,
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_TODOS_FAILED,
+            payload: error.message,
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_TODOS_FAILED,
-          payload: error.message,
-        });
-      });
+    }
   };
 };
